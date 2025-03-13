@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input
+      type="text"
+      name=""
+      id="speed"
+      placeholder="Gib die Anfangsgeschwindigkeit v0 ein."
+      style="display: flex; width: 300px"
+    />
+    <input
+      type="text"
+      name=""
+      id="angle"
+      placeholder="Gebe den Wurfwinkel ein, zwischen 1 und 90 Grad"
+      style="display: flex; width: 300px"
+    />
+    <button id="submit">Submit</button>
+    <p id="distanzMonster"></p>
+    <p id="wurfWeite"></p>
+    <p id="getroffen"></p>
+    <p id="versuche"></p>
+
+    <script>
+      const v0 = document.getElementById("speed");
+      const winkel = document.getElementById("angle");
+      const submit = document.getElementById("submit");
+      const wurfWeite = document.getElementById("wurfWeite");
+      const getroffen = document.getElementById("getroffen");
+      const versuche = document.getElementById("versuche");
+
+      let distanzMonster = document.getElementById("distanzMonster");
+      let g = 9.81,
+        i = 1,
+        shot;
+
+      v0.focus();
+
+      let distance = Math.floor(Math.random() * 100) + 1;
+      distanzMonster.innerHTML = `Distanz zu Monster: ${distance}m`;
+
+      submit.addEventListener("click", () => {
+        v0.value = parseFloat(v0.value);
+        winkel.value = parseFloat(winkel.value);
+        if (isNaN(v0.value) || winkel.value < 0 || winkel.value > 90) {
+          getroffen.innerHTML = "Give a valid number in fields!";
+        } else {
+          winkel.value = winkel.value * (Math.PI / 180);
+          shot = Math.round((v0.value ** 2 * Math.sin(2 * winkel.value)) / g);
+          wurfWeite.innerHTML = `Die Wurfweite beträgt ${shot} m.`;
+
+          if (shot === distance) {
+            getroffen.innerHTML = "Du hast das Monster getroffen.";
+            submit.disabled = true;
+            versuche.innerHTML = "";
+            return;
+          } else if (i === 5) {
+            versuche.innerHTML = "Du hast verloren.";
+            submit.disabled = true;
+            return;
+          } else if (shot > distance || shot < distance) {
+            getroffen.innerHTML = "Du hast das Monster nicht getroffen";
+            versuche.innerHTML = `Du hast noch ${5 - i} Versuche.`;
+            i++;
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
