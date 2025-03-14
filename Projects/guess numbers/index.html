@@ -4,6 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Number Guessing Game</title>
+    <style>
+      body {
+        background: linear-gradient(90deg, #900, #009);
+      }
+      h2,
+      p,
+      label {
+        color: white;
+      }
+      h2 {
+        width: fit-content;
+        margin-inline: auto;
+      }
+      fieldset {
+        border: 1px solid white;
+        border-radius: 4px;
+        width: min(35rem, calc(100% - 4rem));
+        margin-inline: auto;
+      }
+    </style>
   </head>
   <body>
     <h2>Guess the Number</h2>
@@ -12,7 +32,7 @@
       <input type="text" name="guess" id="input_number" class="input" />
       <button type="submit" id="submit">Submit</button>
       <p id="result"></p>
-      <p id="guesses">Previous guesses:</p>
+      <p id="guesses"></p>
     </fieldset>
     <script src="./guess_number.js"></script>
   </body>

@@ -13,7 +13,9 @@ submitBtn.addEventListener("click", checkGuess);
 
 function checkGuess() {
   const userGuess = Number(input.value);
-
+  if (count === 1) {
+    guesses.textContent = "Previous numbers: ";
+  }
   guesses.textContent = `${guesses.textContent} ${userGuess}`;
 
   if (userGuess === randomNumber) {
@@ -43,6 +45,7 @@ function gameOver() {
 }
 
 function resetGame() {
+  randomNumber = Math.floor(Math.random() * 100) + 1;
   count = 1;
   result.textContent = "";
   guesses.textContent = "";
